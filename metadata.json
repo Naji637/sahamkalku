@@ -1,0 +1,6 @@
+{
+  "name": "Kalkulator Saham IDX - Graham Number, Dividen & DCA",
+  "description": "Kalkulator investasi saham Indonesia (IDX / BEI) terlengkap untuk menghitung Harga Wajar Graham Number, Dividen Yield & Net, serta Dollar Cost Averaging (DCA / Average Down) dengan format Rupiah presisi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

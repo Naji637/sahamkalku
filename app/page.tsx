@@ -46,7 +46,7 @@ export default function HomePage() {
               <Sparkles className="h-3.5 w-3.5" />
               <span>
                 Standar Bursa Efek Indonesia (IDX / BEI) &bull; 1 Lot = 100
-                Lembar
+                Lembar 
               </span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-slate-900">

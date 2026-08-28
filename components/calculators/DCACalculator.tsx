@@ -19,17 +19,17 @@ import {
 } from "lucide-react";
 
 export function DCACalculator() {
-  const [ticker, setTicker] = useState("BBRI");
-  const [currentMarketPrice, setCurrentMarketPrice] = useState<number>(4850);
+  const [ticker, setTicker] = useState("");
+  const [currentMarketPrice, setCurrentMarketPrice] = useState<number>(0);
   const [entries, setEntries] = useState<PurchaseEntry[]>([
-    { id: "1", label: "Pembelian 1 (Beli Puncak)", price: 5400, lots: 25 },
-    { id: "2", label: "Pembelian 2 (Average Down 1)", price: 5000, lots: 40 },
-    { id: "3", label: "Pembelian 3 (Support Kuat)", price: 4650, lots: 60 },
+    { id: "1", label: "Pembelian 1 (Beli Puncak)", price: 0, lots: 0 },
+    { id: "2", label: "Pembelian 2 (Average Down 1)", price: 0, lots: 0 },
+    { id: "3", label: "Pembelian 3 (Support Kuat)", price: 0, lots: 0 },
   ]);
 
   // Target Average Simulation
-  const [targetAvgPrice, setTargetAvgPrice] = useState<number>(4800);
-  const [targetBuyPrice, setTargetBuyPrice] = useState<number>(4600);
+  const [targetAvgPrice, setTargetAvgPrice] = useState<number>(0);
+  const [targetBuyPrice, setTargetBuyPrice] = useState<number>(0);
 
   const result = calculateDCA(entries, currentMarketPrice);
 
@@ -54,7 +54,7 @@ export function DCACalculator() {
   const handleUpdateEntry = (
     index: number,
     field: "price" | "lots" | "label",
-    value: any
+    value: any,
   ) => {
     const updated = [...entries];
     updated[index] = { ...updated[index], [field]: value };
@@ -76,14 +76,17 @@ export function DCACalculator() {
 
   if (targetAvgPrice > 0 && targetBuyPrice > 0 && result.totalShares > 0) {
     if (targetBuyPrice === targetAvgPrice) {
-      targetSimError = "Harga beli baru tidak boleh sama persis dengan target average.";
+      targetSimError =
+        "Harga beli baru tidak boleh sama persis dengan target average.";
     } else {
-      const numerator = targetAvgPrice * result.totalShares - result.totalCapital;
+      const numerator =
+        targetAvgPrice * result.totalShares - result.totalCapital;
       const denominator = 100 * (targetBuyPrice - targetAvgPrice);
       const needed = numerator / denominator;
       if (needed <= 0) {
         targetSimError =
-          targetBuyPrice > targetAvgPrice && targetAvgPrice < result.averagePrice
+          targetBuyPrice > targetAvgPrice &&
+          targetAvgPrice < result.averagePrice
             ? "Tidak mungkin menurunkan average dengan membeli di atas harga target."
             : "Kondisi target sudah tercapai atau tidak valid.";
       } else {
@@ -168,7 +171,9 @@ export function DCACalculator() {
 
                 <div className="col-span-4">
                   <div className="relative flex items-center rounded-md border border-slate-200 bg-white focus-within:border-emerald-500">
-                    <span className="pl-2 text-xs font-semibold text-slate-400">Rp</span>
+                    <span className="pl-2 text-xs font-semibold text-slate-400">
+                      Rp
+                    </span>
                     <input
                       type="number"
                       min="1"
@@ -178,7 +183,7 @@ export function DCACalculator() {
                         handleUpdateEntry(
                           idx,
                           "price",
-                          Math.max(0, parseInt(e.target.value) || 0)
+                          Math.max(0, parseInt(e.target.value) || 0),
                         )
                       }
                       placeholder="0"
@@ -198,13 +203,15 @@ export function DCACalculator() {
                         handleUpdateEntry(
                           idx,
                           "lots",
-                          Math.max(0, parseInt(e.target.value) || 0)
+                          Math.max(0, parseInt(e.target.value) || 0),
                         )
                       }
                       placeholder="Lot"
                       className="w-full bg-transparent px-2 py-1.5 text-xs font-semibold text-slate-800 focus:outline-hidden"
                     />
-                    <span className="pr-2 text-[10px] font-medium text-slate-400">Lot</span>
+                    <span className="pr-2 text-[10px] font-medium text-slate-400">
+                      Lot
+                    </span>
                   </div>
                 </div>
 
@@ -256,7 +263,8 @@ export function DCACalculator() {
               <div className="mt-2 flex items-center justify-between text-xs text-slate-300 border-t border-slate-800 pt-2">
                 <span>Total Akumulasi:</span>
                 <span className="font-semibold text-white font-mono">
-                  {formatNumber(result.totalLots)} Lot ({formatNumber(result.totalShares)} Lbr)
+                  {formatNumber(result.totalLots)} Lot (
+                  {formatNumber(result.totalShares)} Lbr)
                 </span>
               </div>
             </div>
@@ -320,7 +328,8 @@ export function DCACalculator() {
               </h4>
             </div>
             <p className="text-[11px] text-slate-500">
-              Ketahui berapa lot lagi yang harus dibeli untuk menurunkan average price Anda ke target tertentu.
+              Ketahui berapa lot lagi yang harus dibeli untuk menurunkan average
+              price Anda ke target tertentu.
             </p>
 
             <div className="grid grid-cols-2 gap-2 pt-1">

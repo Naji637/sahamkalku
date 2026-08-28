@@ -18,10 +18,10 @@ import {
 } from "lucide-react";
 
 export function GrahamCalculator() {
-  const [ticker, setTicker] = useState("BBRI");
-  const [currentPrice, setCurrentPrice] = useState<number>(4850);
-  const [eps, setEps] = useState<number>(405);
-  const [bvps, setBvps] = useState<number>(2150);
+  const [ticker, setTicker] = useState("");
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
+  const [eps, setEps] = useState<number>(0);
+  const [bvps, setBvps] = useState<number>(0);
 
   const result = calculateGrahamNumber(currentPrice, eps, bvps);
 

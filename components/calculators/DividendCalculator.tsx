@@ -16,11 +16,11 @@ import {
 } from "lucide-react";
 
 export function DividendCalculator() {
-  const [ticker, setTicker] = useState("BBRI");
-  const [currentPrice, setCurrentPrice] = useState<number>(4850);
-  const [dps, setDps] = useState<number>(340);
-  const [lots, setLots] = useState<number>(100);
-  const [buyPrice, setBuyPrice] = useState<number>(4500);
+  const [ticker, setTicker] = useState("");
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
+  const [dps, setDps] = useState<number>(0);
+  const [lots, setLots] = useState<number>(0);
+  const [buyPrice, setBuyPrice] = useState<number>(0);
   const [useCustomBuyPrice, setUseCustomBuyPrice] = useState<boolean>(true);
   const [applyTax, setApplyTax] = useState<boolean>(false); // False = Bebas pajak jika diinvestasikan kembali (PP No. 9/2021)
 
